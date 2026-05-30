@@ -21,11 +21,12 @@ Live Demo: _Coming soon / Configure your deployment link here_
 
 ## 🛠️ The Tech Stack
 
-This project is built using a clean, pure web development pipeline with no heavy frameworks or overhead dependencies, ensuring lightning-fast load times and maximum performance.
+This project is built using a modern, lightweight frontend setup powered by **Vite** for lightning-fast compilation, hot module reloading (HMR), and streamlined deployment pipelines.
 
+- **Vite (Build Tool)**: Orchestrates local serving, HMR, asset compilation, and production optimization.
 - **HTML5**: Structured with semantic tags and high-level readability for search engine optimization (SEO).
 - **CSS3 (Vanilla)**: Utilizes advanced variables (CSS custom properties), HSL color spaces, flexbox, grid, neon text/box-shadows, and smooth hardware-accelerated transitions.
-- **JavaScript (ES6+)**: Powers custom particle systems, custom cursors, forms validation, the typing animation, scroll spy highlights, and intersection observers.
+- **JavaScript (ES6+ Module)**: Powers custom particle systems, custom cursors, forms validation, typing animations, scroll spy highlights, and intersection observers.
 - **Fonts & Icons**:
   - Google Fonts (Poppins & Montserrat)
   - Font Awesome Icons v6
@@ -36,19 +37,21 @@ This project is built using a clean, pure web development pipeline with no heavy
 
 ```bash
 Portfolio/
-├── portfolio.html      # Main HTML structure with semantic SEO layouts
-├── style.css           # Custom glassmorphic stylesheet & premium theme system
+├── index.html         # Main entry point with semantic HTML & modules
+├── style.css          # Custom glassmorphic stylesheet & premium theme system
 ├── script.js          # Core animations, custom cursor, canvas particles & page logic
-├── Profile.jpg         # Primary profile image
-├── Profile 2.png       # Hover profile image
-└── README.md           # Project documentation
+├── package.json       # Dependency manifest & npm scripts
+├── .gitignore         # File exclusions for Git version control
+├── Profile.jpg        # Primary profile image
+├── Profile 2.png      # Hover profile image
+└── README.md          # Project documentation
 ```
 
 ---
 
 ## 🚀 How to Run Locally
 
-Since this application is built on top of standard core web technologies, you don't need any complex installation processes.
+Vite orchestrates local serving and asset production.
 
 1. **Clone the repository:**
    ```bash
@@ -56,9 +59,32 @@ Since this application is built on top of standard core web technologies, you do
    cd portfolio
    ```
 
-2. **Open in Browser:**
-   - Double-click `portfolio.html` to open it in your default web browser, OR
-   - Run it with a local development server like **Live Server** in VS Code for live editing.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the Development Server:**
+   ```bash
+   npm run dev
+   ```
+   - Open [http://localhost:5173](http://localhost:5173) in your web browser.
+
+4. **Build for Production (e.g. for Vercel/Netlify hosting):**
+   ```bash
+   npm run build
+   ```
+   - Compiles static assets into the optimized `dist/` directory.
+
+---
+
+## ⚡ Hosting on Vercel
+
+This repository is optimized for one-click deployment on **Vercel**:
+1. Connect your GitHub repository to Vercel.
+2. Select **Vite** as the framework preset (or let Vercel auto-detect it).
+3. Leave the **Build Command** (`npm run build`) and **Output Directory** (`dist`) as default.
+4. Click **Deploy**!
 
 ---
 
