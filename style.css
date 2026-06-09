@@ -631,6 +631,7 @@
       .nav-link { border-radius: 12px; padding: 0.65rem 1rem; width: 100%; }
       .hamburger { display: flex; }
       .hero { flex-direction: column; text-align: center; padding: 120px 6% 60px; gap: 3rem; }
+      .hero-title-row { justify-content: center; }
       .hero-intro { margin: 0 auto 2rem; }
       .hero-cta { justify-content: center; }
       .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -638,15 +639,30 @@
       .about-top-right { order: -1; } /* Image on top */
       .about-bottom-left { order: -1; }
       .about-cta, .about-stats, .about-features { justify-content: center; }
+      .skills-pill-grid { grid-template-columns: repeat(3, 130px); }
     }
 
     /* ── Responsive — Mobile ────────────────────────────────── */
     @media (max-width: 560px) {
-      .section { padding: 70px 5%; }
-      .hero { padding: 110px 5% 60px; gap: 2.5rem; }
-      .hero-name { font-size: 2.2rem; }
-      .profile-wrapper { width: 220px; height: 220px; }
+      .section { padding: 60px 5%; }
+      .hero { padding: 100px 5% 50px; gap: 2rem; }
+      .hero-name { font-size: 2rem; }
+      .profile-wrapper { width: 200px; height: 200px; }
       .footer-inner { flex-direction: column; text-align: center; }
       .back-top { right: 50%; transform: translateX(50%); }
       .back-top:hover { transform: translateX(50%) translateY(-4px); }
+      .skills-pill-grid { grid-template-columns: repeat(2, 130px); gap: 1rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .glass-card { padding: 1.5rem 1.2rem; }
+      .about-layout { gap: 3rem; }
+      .about-top, .about-bottom { gap: 1.5rem; }
+      .btn { padding: 0.6rem 1.2rem; font-size: 0.8rem; }
+    }
+
+    /* ── Touch Devices Fix ──────────────────────────────────── */
+    @media (hover: none) and (pointer: coarse) {
+      body { cursor: auto; }
+      .cursor-glow, .cursor-dot { display: none !important; }
+      .btn, a, .social-icon, .nav-link { cursor: pointer; }
+      .tilt-card { transform: none !important; }
     }
