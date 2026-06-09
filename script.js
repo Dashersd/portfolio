@@ -178,11 +178,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 })();
 
-/* [JS] ── 9. CONTACT FORM ────────────────────────────── */
+/* [JS] ── 9. CONTACT FORM (EmailJS) ────────────────────── */
 (function () {
   const btn = document.getElementById('sendBtn');
   const success = document.getElementById('formSuccess');
   if (!btn) return;
+
+  const SERVICE_ID  = 'service_8d34m6i';
+  const TEMPLATE_ID = 'template_ysgjd0l';
 
   btn.addEventListener('click', () => {
     const name = document.getElementById('name').value.trim();
@@ -191,22 +194,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
     if (!name || !email || !msg) {
       btn.style.boxShadow = '0 0 20px rgba(255,80,80,0.6)';
-      btn.textContent = '⚠ Please fill all fields';
+      btn.innerHTML = '⚠ Please fill all fields';
       setTimeout(() => { btn.style.boxShadow = ''; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message'; }, 2000);
       return;
     }
 
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…'; btn.disabled = true;
-    setTimeout(() => {
-      btn.innerHTML = '<i class="fas fa-check"></i> Sent!'; success.classList.add('show');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+    btn.disabled = true;
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+      name:    name,
+      email:   email,
+      message: msg,
+    }).then(() => {
+      btn.innerHTML = '<i class="fas fa-check"></i> Sent!';
+      success.classList.add('show');
       setTimeout(() => {
-        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message'; btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        btn.disabled = false;
         success.classList.remove('show');
         ['name', 'email', 'message'].forEach(id => document.getElementById(id).value = '');
       }, 3500);
-    }, 1600);
+    }).catch((err) => {
+      console.error('EmailJS error:', err);
+      btn.style.boxShadow = '0 0 20px rgba(255,80,80,0.6)';
+      btn.innerHTML = '✗ Failed — try again';
+      setTimeout(() => {
+        btn.style.boxShadow = '';
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        btn.disabled = false;
+      }, 3000);
+    });
   });
 })();
+
 
 /* [JS] ── 10. RIPPLE EFFECT ──────────────────────────── */
 document.querySelectorAll('.ripple').forEach(btn => {
