@@ -243,3 +243,32 @@ document.querySelectorAll('.ripple').forEach(btn => {
 const s = document.createElement('style');
 s.textContent = '@keyframes rippleAnim { to { transform: scale(2.5); opacity: 0; } }';
 document.head.appendChild(s);
+
+/* [JS] ── 11. PROJECT FILTERS ──────────────────────────── */
+(function () {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons
+      filterBtns.forEach(b => b.classList.remove('active'));
+      // Add active class to clicked button
+      btn.classList.add('active');
+
+      const filterValue = btn.getAttribute('data-filter');
+
+      projectCards.forEach(card => {
+        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+          card.classList.remove('hide');
+          // Trigger reflow to restart animation
+          void card.offsetWidth;
+          card.style.animation = 'cardFadeIn 0.5s ease forwards';
+        } else {
+          card.classList.add('hide');
+          card.style.animation = 'none';
+        }
+      });
+    });
+  });
+})();
