@@ -33,6 +33,40 @@ This project is built using a modern, lightweight frontend setup powered by **Vi
 
 ---
 
+## 💼 Featured Projects
+
+A showcase of my recent front-end and full-stack work.
+
+- **[Star Fleet](https://star-fleet-silk.vercel.app)**  
+  An interactive, futuristic web application featuring a stunning sci-fi inspired interface.  
+  *Stack:* `React`, `Tailwind CSS`, `Vite`
+
+- **[Fleuria](https://fleuria-ddgv.vercel.app)**  
+  A modern floral boutique website offering handcrafted floral arrangements.  
+  *Stack:* `React`, `Vite`, `Tailwind CSS`
+
+- **[Polaris](https://polaris-chi-olive.vercel.app/)**  
+  An avant-garde fashion style compass showcasing curated collections with smooth animations.  
+  *Stack:* `React`, `Tailwind CSS`, `Framer Motion`, `Vite`
+
+- **[Eutopia](https://eutopia-indol.vercel.app/)**  
+  A creative workspace shaping avant-garde ideas through the power of AI.  
+  *Stack:* `React`, `Tailwind CSS`, `Framer Motion`, `Vite`
+
+- **[Aurelia](https://aurelia-sigma.vercel.app/)**  
+  A sophisticated luxury jewelry e-commerce website with high-performance interactive showcases.  
+  *Stack:* `React`, `Tailwind CSS`, `Framer Motion`, `TypeScript`
+
+- **[Time Shift](https://time-shift-ivory.vercel.app/watch.html)**  
+  A premium e-commerce platform for luxury timepieces featuring an intricate 3D animated analog clock.  
+  *Stack:* `HTML5`, `CSS3`, `JavaScript`, `3D Animations`
+
+- **[MDRRMO Information Management System](http://mdrrmo-system.infinityfreeapp.com/)**  
+  A comprehensive safety and resiliency portal with real-time emergency feeds and dynamic equipment inventory.  
+  *Stack:* `HTML5`, `Bootstrap`, `JavaScript`, `PHP`
+
+---
+
 ## 📂 Project Structure
 
 ```bash
