@@ -714,7 +714,7 @@
     .project-img-wrap img, .project-img-wrap .project-video { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.5s ease, transform 0.55s ease; position: absolute; inset: 0; }
     .project-img-wrap .project-video { opacity: 0; z-index: 1; }
     .project-img-wrap img { z-index: 0; }
-    .project-card:hover .project-img-wrap img { opacity: 0; transform: scale(1.08); }
+    .project-card:hover .project-img-wrap img { transform: scale(1.08); }
     .project-card:hover .project-img-wrap .project-video { opacity: 1; transform: scale(1.05); }
     .project-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.85)); pointer-events: none; z-index: 2; }
     .project-info { padding: 1.4rem 1.5rem 1.5rem; }
