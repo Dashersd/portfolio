@@ -20,7 +20,7 @@
   }
   animateCursor();
 
-  document.querySelectorAll('a, button, .skill-card, .project-card, .social-icon').forEach(el => {
+  document.querySelectorAll('a, button, .skill-pill, .project-card, .social-icon').forEach(el => {
     el.addEventListener('mouseenter', () => { glow.style.transform = 'translate(-50%,-50%) scale(2.2)'; glow.style.opacity = '0.6'; });
     el.addEventListener('mouseleave', () => { glow.style.transform = 'translate(-50%,-50%) scale(1)'; glow.style.opacity = '1'; });
   });
@@ -142,27 +142,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        entry.target.querySelectorAll('.skill-fill').forEach(fill => {
-          const bar = fill.closest('.skill-bar');
-          fill.style.width = (bar.dataset.width || 80) + '%';
-        });
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-})();
-
-/* [JS] ── 7. SKILL BARS ──────────────────────────────── */
-(function () {
-  function checkBars() {
-    document.querySelectorAll('.skill-bar').forEach(bar => {
-      if (bar.getBoundingClientRect().top < window.innerHeight - 60)
-        bar.querySelector('.skill-fill').style.width = (bar.dataset.width || 80) + '%';
-    });
-  }
-  window.addEventListener('scroll', checkBars);
-  checkBars();
 })();
 
 /* [JS] ── 8. 3D TILT ON PROJECT CARDS ────────────────── */
