@@ -1,3 +1,57 @@
+/* [JS] ── 0. PRELOADER BOOT SEQUENCE ─────────────────── */
+(function () {
+  const preloader = document.getElementById('preloader');
+  const percentEl = document.getElementById('preloaderPercent');
+  const progressEl = document.getElementById('preloaderProgress');
+  const wordEl = document.getElementById('preloaderWord');
+  if (!preloader || !percentEl || !progressEl || !wordEl) return;
+
+  // Lock scroll
+  document.body.style.overflow = 'hidden';
+
+  let currentPercent = 0;
+  
+  // Animate the counter from 000 to 100
+  function updateLoader() {
+    // Add random increments for a realistic loading feel
+    currentPercent += Math.floor(Math.random() * 8) + 1;
+    
+    if (currentPercent >= 100) {
+      currentPercent = 100;
+      percentEl.innerText = '100';
+      progressEl.style.width = '100%';
+      wordEl.innerText = 'Inspire';
+      
+      // Complete loading
+      setTimeout(() => {
+        preloader.classList.add('hide');
+        document.body.style.overflow = ''; // Unlock scroll
+      }, 800); // Wait a moment at 100%
+      
+      return;
+    }
+    
+    // Cycle words based on percentage
+    if (currentPercent < 33) {
+      wordEl.innerText = 'Design';
+    } else if (currentPercent < 66) {
+      wordEl.innerText = 'Create';
+    } else {
+      wordEl.innerText = 'Inspire';
+    }
+    
+    // Format to 3 digits (e.g., 017)
+    percentEl.innerText = currentPercent.toString().padStart(3, '0');
+    progressEl.style.width = currentPercent + '%';
+    
+    // Random interval between frames
+    setTimeout(updateLoader, Math.random() * 120 + 40);
+  }
+
+  // Start sequence
+  setTimeout(updateLoader, 300);
+})();
+
 /* [JS] ── 1. CUSTOM GLOW CURSOR ──────────────────────── */
 (function () {
   const glow = document.getElementById('cursorGlow');
@@ -121,10 +175,17 @@
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('open');
     navLinks.classList.toggle('open');
+    // Lock scroll when open
+    if (navLinks.classList.contains('open')) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
   });
   links.forEach(l => l.addEventListener('click', () => {
     hamburger.classList.remove('open');
     navLinks.classList.remove('open');
+    document.body.style.overflow = '';
   }));
 })();
 
@@ -212,6 +273,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 })();
 
+
+/* [JS] ── 9.5 PROJECT VIDEO HOVER ─────────────────────── */
+(function () {
+  document.querySelectorAll('.project-card').forEach(card => {
+    const video = card.querySelector('.project-video');
+    if (!video) return;
+    card.addEventListener('mouseenter', () => video.play().catch(()=>{}));
+    card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+  });
+})();
 
 /* [JS] ── 10. RIPPLE EFFECT ──────────────────────────── */
 document.querySelectorAll('.ripple').forEach(btn => {
