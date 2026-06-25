@@ -875,3 +875,69 @@
       .btn, a, .social-icon, .nav-link { cursor: pointer; }
       .tilt-card { transform: none !important; }
     }
+
+/* ============================================================
+   [CSS] PORTFOLIO IMPROVEMENTS (ROAST FIXES)
+============================================================ */
+
+/* Prominent CTA Button */
+.prominent-cta {
+  font-size: 1.1rem;
+  padding: 14px 28px;
+  background: linear-gradient(45deg, var(--blue), var(--cyan));
+  box-shadow: 0 0 15px rgba(0, 102, 255, 0.6), 0 0 30px rgba(0, 245, 255, 0.4);
+  animation: ctaPulse 2s infinite;
+  border: none;
+}
+
+.prominent-cta:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 102, 255, 0.8), 0 0 40px rgba(0, 245, 255, 0.6);
+}
+
+@keyframes ctaPulse {
+  0% { box-shadow: 0 0 15px rgba(0, 102, 255, 0.6); }
+  50% { box-shadow: 0 0 25px rgba(0, 102, 255, 0.9), 0 0 40px rgba(0, 245, 255, 0.7); }
+  100% { box-shadow: 0 0 15px rgba(0, 102, 255, 0.6); }
+}
+
+/* Hero Stats / Trust Signals */
+.hero-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--cyan);
+  text-shadow: var(--glow-cyan);
+  font-family: var(--font-main);
+}
+
+.stat-text {
+  font-size: 0.85rem;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .hero-stats {
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    align-items: center;
+  }
+}
