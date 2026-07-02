@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react';
+import Reveal from './ui/Reveal';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   const typedTextRef = useRef(null);
@@ -72,45 +74,79 @@ const Hero = () => {
     return () => countElements.forEach(el => observer.unobserve(el));
   }, []);
 
+  // Framer Motion variants
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
   return (
     <section id="home" className="hero" style={{ position: 'relative' }}>
-      <div className="hero-left reveal">
-        <div className="avail-badge">
+      <motion.div 
+        className="hero-left"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+      >
+        <motion.div variants={item} className="avail-badge">
           <span className="avail-dot"></span>
           Available for Work
-        </div>
-        <p className="hero-greeting">Hello, World! 👋</p>
-        <h1 className="hero-name">Helman Dashelle M. <span className="glow-text">Dacuma</span></h1>
-        <div className="hero-title-row">
+        </motion.div>
+        <motion.p variants={item} className="hero-greeting">Hello, World! 👋</motion.p>
+        <motion.h1 variants={item} className="hero-name">Helman Dashelle M. <span className="glow-text">Dacuma</span></motion.h1>
+        <motion.div variants={item} className="hero-title-row">
           <span className="title-prefix">I'm a&nbsp;</span>
           <span className="typed-text" id="typedText" ref={typedTextRef}></span>
           <span className="typed-cursor">|</span>
-        </div>
-        <p className="hero-intro">
+        </motion.div>
+        <motion.p variants={item} className="hero-intro">
           Engineering High-Performance Web Experiences. I build fast, scalable, and visually stunning digital solutions that drive real results.
-        </p>
-        <div className="hero-cta desktop-cta">
+        </motion.p>
+        <motion.div variants={item} className="hero-cta desktop-cta">
           <a href="#projects" className="btn btn-primary ripple prominent-cta"><i className="fas fa-rocket"></i> Start a Project</a>
           <a href="/Resume.pdf" download="Helman_Dacuma_CV.pdf" className="btn btn-outline ripple"><i className="fas fa-download"></i> Download CV</a>
-        </div>
+        </motion.div>
         
-        <div className="hero-stats reveal reveal-delay">
+        <motion.div variants={item} className="hero-stats">
           <div className="stat-item">
-            <span className="stat-number count-up" data-target="10">0</span><span className="stat-number">+</span>
-            <span className="stat-text">Projects Built</span>
+            <div>
+              <span className="stat-number count-up" data-target="8">0</span><span className="stat-number">+</span>
+            </div>
+            <span className="stat-text">Projects</span>
           </div>
           <div className="stat-item">
-            <span className="stat-number count-up" data-target="2">0</span><span className="stat-number">+</span>
-            <span className="stat-text">Years Coding</span>
+            <div>
+              <span className="stat-number count-up" data-target="2">0</span><span className="stat-number">+</span>
+            </div>
+            <span className="stat-text">Coding</span>
           </div>
           <div className="stat-item">
-            <span className="stat-number count-up" data-target="100">0</span><span className="stat-number">%</span>
+            <div>
+              <span className="stat-number count-up" data-target="100">0</span><span className="stat-number">%</span>
+            </div>
             <span className="stat-text">Passion Driven</span>
           </div>
-        </div>
-      </div>
-      <div className="hero-right reveal reveal-delay">
-        <div className="profile-wrapper">
+        </motion.div>
+      </motion.div>
+
+      <Reveal delay={0.4} className="hero-right">
+        <motion.div 
+          className="profile-wrapper"
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        >
           <div className="profile-ring"></div>
           <div className="profile-ring ring-2"></div>
           <div className="profile-glow"></div>
@@ -122,12 +158,13 @@ const Hero = () => {
           <div className="orbit orbit-2"><span className="orbit-icon" style={{ '--brand': '#61dafb' }}><i className="fab fa-react"></i></span></div>
           <div className="orbit orbit-3"><span className="orbit-icon" style={{ '--brand': '#f7df1e' }}><i className="fab fa-js"></i></span></div>
           <div className="orbit orbit-4"><span className="orbit-icon" style={{ '--brand': '#ffffff' }}><i className="fas fa-layer-group"></i></span></div>
-        </div>
-      </div>
-      <div className="hero-cta mobile-cta reveal reveal-delay">
+        </motion.div>
+      </Reveal>
+
+      <Reveal delay={0.6} className="hero-cta mobile-cta">
         <a href="#projects" className="btn btn-primary ripple prominent-cta"><i className="fas fa-rocket"></i> Start a Project</a>
         <a href="/Resume.pdf" download="Helman_Dacuma_CV.pdf" className="btn btn-outline ripple"><i className="fas fa-download"></i> Download CV</a>
-      </div>
+      </Reveal>
     </section>
   );
 };

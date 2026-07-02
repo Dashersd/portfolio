@@ -1,4 +1,5 @@
 import React from 'react';
+import Reveal from './ui/Reveal';
 
 const Skills = () => {
   const frontendSkills = [
@@ -52,26 +53,26 @@ const Skills = () => {
 
   return (
     <section id="skills" className="section skills" data-watermark="SKILLS">
-      <div className="skills-header text-center reveal">
+      <Reveal className="skills-header text-center">
         <p className="skills-sub">MY SKILLS</p>
         <h2 className="skills-title">Empowering My <span className="glow-text">Tools</span></h2>
         <p className="skills-desc">Software I use for My Designs</p>
-      </div>
+      </Reveal>
 
-      <div className="skills-category reveal">
+      <Reveal delay={0.1} className="skills-category">
         <h3 className="skills-category-title">Front-End</h3>
         {renderMarquee(frontendSkills, '35s', 'normal')}
-      </div>
+      </Reveal>
 
-      <div className="skills-category reveal reveal-delay">
+      <Reveal delay={0.2} className="skills-category">
         <h3 className="skills-category-title">Back-End</h3>
         {renderMarquee(backendSkills, '40s', 'reverse')}
-      </div>
+      </Reveal>
 
-      <div className="skills-category reveal">
+      <Reveal delay={0.3} className="skills-category">
         <h3 className="skills-category-title">Tools</h3>
         {renderMarquee(toolsSkills, '30s', 'normal')}
-      </div>
+      </Reveal>
     </section>
   );
 };

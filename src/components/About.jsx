@@ -1,16 +1,17 @@
 import React from 'react';
+import Reveal from './ui/Reveal';
 
 const About = () => {
   return (
     <section id="about" className="section about">
-      <div className="section-header reveal">
+      <Reveal className="section-header">
         <p className="section-label">Get to know me</p>
         <h2 className="section-title">About <span className="glow-text">Me</span></h2>
         <div className="section-line"></div>
-      </div>
+      </Reveal>
 
       <div className="about-layout">
-        <div className="about-top reveal">
+        <Reveal delay={0.2} className="about-top">
           <div className="about-top-left">
             <h2 className="about-heading">About my <span className="glow-text">journey</span></h2>
             <p className="about-desc">Hello! I'm Helman Dashelle M. Dacuma, a dedicated web developer focused on delivering tailored digital solutions. I engineer responsive, high-performance applications that elevate your brand and engage your users. Driven by continuous learning, I turn complex problems into elegant, intuitive web experiences.</p>
@@ -24,9 +25,9 @@ const About = () => {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="about-bottom reveal reveal-delay">
+        <Reveal delay={0.4} className="about-bottom">
           <div className="about-bottom-left">
             <div className="about-img-frame">
               <div className="tech-corner tl"></div><div className="tech-corner tr"></div><div className="tech-corner bl"></div><div className="tech-corner br"></div>
@@ -42,33 +43,33 @@ const About = () => {
             <p className="about-desc">With a robust foundation in modern web technologies, I build scalable solutions that grow with your needs. I focus on creating reliable, visually stunning applications tailored to help you achieve your goals and stand out in the digital landscape.</p>
 
             <div className="timeline">
-              <div className="tl-item reveal">
+              <Reveal delay={0.5} className="tl-item">
                 <div className="tl-dot"></div>
                 <div className="tl-content">
                   <span className="tl-date">2023 — Present</span>
                   <strong>Freelance Web Developer</strong>
                   <p>Building full-stack web applications for clients across various industries.</p>
                 </div>
-              </div>
-              <div className="tl-item reveal reveal-delay">
+              </Reveal>
+              <Reveal delay={0.6} className="tl-item">
                 <div className="tl-dot"></div>
                 <div className="tl-content">
                   <span className="tl-date">2022 — 2026</span>
                   <strong>BS in Information and Technology</strong>
                   <p>Saint Columban College — Major in Web & Mobile Development</p>
                 </div>
-              </div>
-              <div className="tl-item reveal reveal-delay">
+              </Reveal>
+              <Reveal delay={0.7} className="tl-item">
                 <div className="tl-dot"></div>
                 <div className="tl-content">
                   <span className="tl-date">2022</span>
                   <strong>Started Coding Journey</strong>
                   <p>First lines of HTML & CSS. Fell in love with building for the web.</p>
                 </div>
-              </div>
+              </Reveal>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import Tilt from 'react-parallax-tilt';
+import Reveal from './ui/Reveal';
 
 const projectsData = [
   {
@@ -94,7 +96,6 @@ const projectsData = [
 const Projects = () => {
   const [filter, setFilter] = useState('all');
   const [visibleProjects, setVisibleProjects] = useState(projectsData);
-  const gridRef = useRef(null);
 
   useEffect(() => {
     if (filter === 'all') {
@@ -106,13 +107,13 @@ const Projects = () => {
 
   return (
     <section id="projects" className="section projects" data-watermark="WORK">
-      <div className="section-header reveal">
+      <Reveal className="section-header">
         <p className="section-label">What I've built</p>
         <h2 className="section-title">My <span className="glow-text">Projects</span></h2>
         <div className="section-line"></div>
-      </div>
+      </Reveal>
 
-      <div className="project-filters reveal">
+      <Reveal delay={0.2} className="project-filters">
         <button 
           className={`filter-btn ripple ${filter === 'all' ? 'active' : ''}`} 
           onClick={() => setFilter('all')}
@@ -125,38 +126,50 @@ const Projects = () => {
           className={`filter-btn ripple ${filter === 'fullstack' ? 'active' : ''}`} 
           onClick={() => setFilter('fullstack')}
         >Full-Stack & Systems</button>
-      </div>
+      </Reveal>
 
-      <div className="projects-grid" ref={gridRef}>
+      <div className="projects-grid">
         {visibleProjects.map((project, index) => (
-          <div key={project.id} className="project-card reveal tilt-card" style={{ animationDelay: `${index * 0.1}s` }}>
-            <div className="project-img-wrap">
-              <span className={`card-category-badge ${project.category === 'fullstack' ? 'badge-fullstack' : ''}`}>
-                {project.categoryLabel}
-              </span>
-              <span className="card-number">{project.id}</span>
-              <img src={project.image} alt={project.title} />
-              <video src="/projects/placeholder.mp4" className="project-video" muted loop playsInline></video>
-              <div className="project-overlay"></div>
-            </div>
-            <div className="project-info">
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-              <div className="project-tags">
-                {project.tags.map(tag => <span key={tag}>{tag}</span>)}
+          <Reveal key={project.id} delay={0.1 * (index % 4)}>
+            <Tilt 
+              className="project-card" 
+              glareEnable={true} 
+              glareMaxOpacity={0.15} 
+              glareColor="#ffffff"
+              glarePosition="all"
+              tiltMaxAngleX={5}
+              tiltMaxAngleY={5}
+              scale={1.02}
+              transitionSpeed={2000}
+            >
+              <div className="project-img-wrap">
+                <span className={`card-category-badge ${project.category === 'fullstack' ? 'badge-fullstack' : ''}`}>
+                  {project.categoryLabel}
+                </span>
+                <span className="card-number">{project.id}</span>
+                <img src={project.image} alt={project.title} />
+                <video src="/projects/placeholder.mp4" className="project-video" muted loop playsInline></video>
+                <div className="project-overlay"></div>
               </div>
-              <div className="project-btns">
-                <a href={project.demo} target="_blank" rel="noreferrer" className="btn btn-sm btn-primary ripple">
-                  <i className="fas fa-external-link-alt"></i> Live Demo
-                </a>
-                {project.source && (
-                  <a href={project.source} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline ripple">
-                    <i className="fab fa-github"></i> Source
+              <div className="project-info">
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <div className="project-tags">
+                  {project.tags.map(tag => <span key={tag}>{tag}</span>)}
+                </div>
+                <div className="project-btns">
+                  <a href={project.demo} target="_blank" rel="noreferrer" className="btn btn-sm btn-primary ripple">
+                    <i className="fas fa-external-link-alt"></i> Live Demo
                   </a>
-                )}
+                  {project.source && (
+                    <a href={project.source} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline ripple">
+                      <i className="fab fa-github"></i> Source
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
-          </div>
+            </Tilt>
+          </Reveal>
         ))}
       </div>
     </section>

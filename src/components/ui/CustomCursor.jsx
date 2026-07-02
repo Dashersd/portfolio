@@ -5,8 +5,8 @@ const CustomCursor = () => {
   const dotRef = useRef(null);
 
   useEffect(() => {
-    let mx = 0, my = 0;
-    let gx = 0, gy = 0;
+    let mx = -100, my = -100;
+    let gx = -100, gy = -100;
     let animationFrameId;
 
     const handleMouseMove = (e) => {
@@ -28,11 +28,29 @@ const CustomCursor = () => {
       animationFrameId = requestAnimationFrame(animateCursor);
     };
 
+    const handleMouseOver = (e) => {
+      const target = e.target;
+      if (
+        target.tagName.toLowerCase() === 'a' ||
+        target.tagName.toLowerCase() === 'button' ||
+        target.closest('a') ||
+        target.closest('button') ||
+        target.classList.contains('project-card') ||
+        target.classList.contains('skill-card')
+      ) {
+        document.body.classList.add('cursor-magnetic');
+      } else {
+        document.body.classList.remove('cursor-magnetic');
+      }
+    };
+
     document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseover', handleMouseOver);
     animateCursor();
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseover', handleMouseOver);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
