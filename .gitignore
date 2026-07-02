@@ -7,24 +7,18 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Dependency directories
-node_modules/
-jspm_packages/
+node_modules
+dist
+dist-ssr
+*.local
 
-# Optional npm cache directory
-.npm
-
-# Output directories
-dist/
-dist-ssr/
-
-# Editor folders and workspace files
+# Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-.idea/
+.idea
 .DS_Store
 *.suo
-*.ntvsca
-*.ntvsce
+*.ntvs*
+*.njsproj
 *.sln
 *.sw?

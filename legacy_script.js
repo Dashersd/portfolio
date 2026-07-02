@@ -91,14 +91,15 @@
   resize();
 
   function rand(a, b) { return a + Math.random() * (b - a); }
-  const COLORS = ['rgba(0,245,255,', 'rgba(0,102,255,', 'rgba(0,170,255,'];
+  /* Monochrome particles — white/grey to match minimal black+grid bg */
+  const COLORS = ['rgba(255,255,255,', 'rgba(200,200,210,', 'rgba(180,180,200,'];
 
   function Particle() {
     this.reset = function () {
       this.x = rand(0, W); this.y = rand(0, H);
-      this.r = rand(0.6, 2.2);
-      this.dx = rand(-0.35, 0.35); this.dy = rand(-0.5, 0.15);
-      this.life = rand(0.3, 0.9);
+      this.r = rand(0.4, 1.6);
+      this.dx = rand(-0.25, 0.25); this.dy = rand(-0.35, 0.12);
+      this.life = rand(0.15, 0.55);
       this.c = COLORS[Math.floor(Math.random() * COLORS.length)];
     };
     this.reset();
@@ -126,7 +127,7 @@
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = 'rgba(0,245,255,' + (0.06 * (1 - dist / 100)) + ')';
+          ctx.strokeStyle = 'rgba(255,255,255,' + (0.05 * (1 - dist / 100)) + ')';
           ctx.lineWidth = 0.5; ctx.stroke();
         }
       }
@@ -326,4 +327,90 @@ document.head.appendChild(s);
       });
     });
   });
+})();
+
+/* [JS] ── 12. READING PROGRESS BAR ─────────────────────── */
+(function () {
+  const bar = document.getElementById('readingProgress');
+  if (!bar) return;
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+  }, { passive: true });
+})();
+
+/* [JS] ── 13. COUNT-UP ANIMATION ───────────────────────── */
+(function () {
+  const counters = document.querySelectorAll('.count-up');
+  if (!counters.length) return;
+
+  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const duration = 1800;
+    let start = null;
+
+    function step(timestamp) {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      el.textContent = Math.floor(easeOut(progress) * target);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(el => observer.observe(el));
+})();
+
+/* [JS] ── 14. SECTION WATERMARKS ───────────────────────── */
+(function () {
+  const watermarks = {
+    'home':     'HD',
+    'about':    'About',
+    'skills':   'Skills',
+    'projects': 'Work',
+    'contact':  'Contact',
+  };
+  Object.entries(watermarks).forEach(([id, text]) => {
+    const sec = document.getElementById(id);
+    if (sec) sec.setAttribute('data-watermark', text);
+  });
+})();
+
+/* [JS] ── 15. MAGNETIC CURSOR ──────────────────────────── */
+(function () {
+  const glow = document.getElementById('cursorGlow');
+  if (!glow) return;
+
+  const magneticEls = document.querySelectorAll('a, button, .skill-card, .project-card, .social-icon, .filter-btn');
+  magneticEls.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      glow.style.width = '70px';
+      glow.style.height = '70px';
+      glow.style.background = 'radial-gradient(circle, rgba(0,245,255,0.22) 0%, transparent 70%)';
+    });
+    el.addEventListener('mouseleave', () => {
+      glow.style.width = '40px';
+      glow.style.height = '40px';
+      glow.style.background = 'radial-gradient(circle, rgba(0,245,255,0.25) 0%, transparent 70%)';
+    });
+  });
+})();
+
+/* [JS] ── 16. HERO POSITION RELATIVE (scroll indicator) ── */
+(function () {
+  const hero = document.querySelector('.hero');
+  if (hero) hero.style.position = 'relative';
 })();
