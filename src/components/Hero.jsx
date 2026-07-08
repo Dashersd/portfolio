@@ -116,7 +116,6 @@ const Hero = () => {
         </motion.p>
         <motion.div variants={item} className="hero-cta desktop-cta">
           <a href="#projects" className="btn btn-primary ripple prominent-cta"><i className="fas fa-rocket"></i> Start a Project</a>
-          <a href="/Resume.pdf" download="Helman_Dacuma_CV.pdf" className="btn btn-outline ripple"><i className="fas fa-download"></i> Download CV</a>
         </motion.div>
         
         <motion.div variants={item} className="hero-stats">
@@ -163,7 +162,6 @@ const Hero = () => {
 
       <Reveal delay={0.6} className="hero-cta mobile-cta">
         <a href="#projects" className="btn btn-primary ripple prominent-cta"><i className="fas fa-rocket"></i> Start a Project</a>
-        <a href="/Resume.pdf" download="Helman_Dacuma_CV.pdf" className="btn btn-outline ripple"><i className="fas fa-download"></i> Download CV</a>
       </Reveal>
     </section>
   );
