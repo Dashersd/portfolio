@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
   const typedTextRef = useRef(null);
-  
+
   useEffect(() => {
-    const textArray = ["Web Developer", "Frontend Engineer", "Creative Designer"];
+    const textArray = ["Web Developer", "Frontend Developer", "AI Assisted"];
     const typingDelay = 100;
     const erasingDelay = 60;
     const newTextDelay = 1500;
@@ -93,7 +93,7 @@ const Hero = () => {
 
   return (
     <section id="home" className="hero" style={{ position: 'relative' }}>
-      <motion.div 
+      <motion.div
         className="hero-left"
         variants={container}
         initial="hidden"
@@ -117,7 +117,7 @@ const Hero = () => {
         <motion.div variants={item} className="hero-cta desktop-cta">
           <a href="#projects" className="btn btn-primary ripple prominent-cta"><i className="fas fa-rocket"></i> Start a Project</a>
         </motion.div>
-        
+
         <motion.div variants={item} className="hero-stats">
           <div className="stat-item">
             <div>
@@ -141,7 +141,7 @@ const Hero = () => {
       </motion.div>
 
       <Reveal delay={0.4} className="hero-right">
-        <motion.div 
+        <motion.div
           className="profile-wrapper"
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}

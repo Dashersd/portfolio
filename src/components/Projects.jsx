@@ -70,17 +70,6 @@ const projectsData = [
     source: 'https://github.com/Dashersd/TimeShift'
   },
   {
-    id: '07',
-    category: 'fullstack',
-    categoryLabel: 'Full-Stack',
-    image: '/projects/mdrrmo.png',
-    title: 'MDRRMO Information Management System',
-    description: 'A comprehensive safety and resiliency portal for the Municipal Disaster Risk Reduction and Management Office. Features real-time emergency feeds, dynamic equipment inventory, activity logs, and a 24/7 hotline roster.',
-    tags: ['HTML5', 'Bootstrap', 'JavaScript', 'PHP'],
-    demo: 'http://mdrrmo-system.infinityfreeapp.com/',
-    source: 'https://github.com/Dashersd/MDRRMO'
-  },
-  {
     id: '08',
     category: 'fullstack',
     categoryLabel: 'Full-Stack',
