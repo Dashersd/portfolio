@@ -116,26 +116,42 @@ const Hero = () => {
         </motion.p>
         <motion.div variants={item} className="hero-cta desktop-cta">
           <a href="#projects" className="btn btn-primary ripple prominent-cta"><i className="fas fa-rocket"></i> Start a Project</a>
+          <a href="#contact" className="btn btn-outline ripple"><i className="fas fa-paper-plane"></i> Contact Me</a>
+        </motion.div>
+
+        <motion.div variants={item} className="hero-socials">
+          <a href="https://github.com/Dashersd" target="_blank" rel="noreferrer" className="hero-social-icon" aria-label="GitHub">
+            <i className="fab fa-github"></i>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hero-social-icon" aria-label="LinkedIn">
+            <i className="fab fa-linkedin-in"></i>
+          </a>
+          <a href="mailto:helmandashelle@gmail.com" className="hero-social-icon" aria-label="Email">
+            <i className="fas fa-envelope"></i>
+          </a>
+          <a href="#contact" className="hero-social-icon" aria-label="Quick Message">
+            <i className="fas fa-comment-alt"></i>
+          </a>
         </motion.div>
 
         <motion.div variants={item} className="hero-stats">
-          <div className="stat-item">
+          <div className="hero-stat-card">
             <div>
-              <span className="stat-number count-up" data-target="8">0</span><span className="stat-number">+</span>
+              <span className="stat-number count-up" data-target="9">0</span><span className="stat-number">+</span>
             </div>
-            <span className="stat-text">Projects</span>
+            <span className="stat-text">Completed Projects</span>
           </div>
-          <div className="stat-item">
+          <div className="hero-stat-card">
             <div>
               <span className="stat-number count-up" data-target="2">0</span><span className="stat-number">+</span>
             </div>
-            <span className="stat-text">Coding</span>
+            <span className="stat-text">Years Coding</span>
           </div>
-          <div className="stat-item">
+          <div className="hero-stat-card">
             <div>
               <span className="stat-number count-up" data-target="100">0</span><span className="stat-number">%</span>
             </div>
-            <span className="stat-text">Passion Driven</span>
+            <span className="stat-text">Client Satisfaction</span>
           </div>
         </motion.div>
       </motion.div>
@@ -162,6 +178,7 @@ const Hero = () => {
 
       <Reveal delay={0.6} className="hero-cta mobile-cta">
         <a href="#projects" className="btn btn-primary ripple prominent-cta"><i className="fas fa-rocket"></i> Start a Project</a>
+        <a href="#contact" className="btn btn-outline ripple"><i className="fas fa-paper-plane"></i> Contact Me</a>
       </Reveal>
     </section>
   );

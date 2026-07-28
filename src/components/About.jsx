@@ -1,5 +1,6 @@
 import React from 'react';
 import Reveal from './ui/Reveal';
+import SpotlightCard from './ui/SpotlightCard';
 
 const About = () => {
   return (
@@ -17,23 +18,40 @@ const About = () => {
             <p className="about-desc">Hello! I'm Helman Dashelle M. Dacuma, a dedicated web developer focused on delivering tailored digital solutions. I engineer responsive, high-performance applications that elevate your brand and engage your users. Driven by continuous learning, I turn complex problems into elegant, intuitive web experiences.</p>
           </div>
           <div className="about-top-right">
-            <div className="about-img-frame">
-              <div className="tech-corner tl"></div><div className="tech-corner tr"></div><div className="tech-corner bl"></div><div className="tech-corner br"></div>
-              <div className="about-img-wrap">
-                <img src="/Profile.jpg" alt="Profile" className="about-img about-img-main" />
-                <img src="/Profile 2.png" alt="Profile Hover" className="about-img about-img-hover" />
+            <SpotlightCard>
+              <div className="about-img-frame" style={{ borderRadius: '20px' }}>
+                <div className="tech-corner tl"></div><div className="tech-corner tr"></div><div className="tech-corner bl"></div><div className="tech-corner br"></div>
+                <div className="about-img-wrap">
+                  <img src="/Profile.jpg" alt="Profile" className="about-img about-img-main" />
+                  <img src="/Profile 2.png" alt="Profile Hover" className="about-img about-img-hover" />
+                </div>
               </div>
-            </div>
+            </SpotlightCard>
           </div>
         </Reveal>
 
         <Reveal delay={0.4} className="about-bottom">
           <div className="about-bottom-left">
-            <div className="about-img-frame">
-              <div className="tech-corner tl"></div><div className="tech-corner tr"></div><div className="tech-corner bl"></div><div className="tech-corner br"></div>
-              <div className="about-img-wrap">
-                <img src="/Profile 2.png" alt="Profile" className="about-img about-img-main" />
-                <img src="/Profile.jpg" alt="Profile Hover" className="about-img about-img-hover" />
+            <div className="about-highlights-grid">
+              <div className="highlight-card">
+                <div className="highlight-icon"><i className="fas fa-code"></i></div>
+                <h4>Clean Architecture</h4>
+                <p>Writing modular, maintainable, and scalable code built to grow with your needs.</p>
+              </div>
+              <div className="highlight-card">
+                <div className="highlight-icon"><i className="fas fa-bolt"></i></div>
+                <h4>High Performance</h4>
+                <p>Optimized image loading, crisp animations, and lightning-fast page load speeds.</p>
+              </div>
+              <div className="highlight-card">
+                <div className="highlight-icon"><i className="fas fa-mobile-alt"></i></div>
+                <h4>Fully Responsive</h4>
+                <p>Seamlessly adapted layouts ensuring a flawless experience on desktop, tablet, and mobile.</p>
+              </div>
+              <div className="highlight-card">
+                <div className="highlight-icon"><i className="fas fa-handshake"></i></div>
+                <h4>Client Focused</h4>
+                <p>Clear communication, structured project workflows, and on-time delivery.</p>
               </div>
             </div>
           </div>
@@ -68,6 +86,12 @@ const About = () => {
                 </div>
               </Reveal>
             </div>
+
+            <div style={{ marginTop: '2.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <a href="#contact" className="btn btn-primary ripple">
+                <i className="fas fa-envelope"></i> Get In Touch
+              </a>
+            </div>
           </div>
         </Reveal>
       </div>
@@ -76,3 +100,4 @@ const About = () => {
 };
 
 export default About;
+

@@ -1,91 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Tilt from 'react-parallax-tilt';
+import { motion, AnimatePresence } from 'framer-motion';
 import Reveal from './ui/Reveal';
-
-const projectsData = [
-  {
-    id: '01',
-    category: 'frontend',
-    categoryLabel: 'Front-End',
-    image: '/projects/star-fleet.png',
-    title: 'Star Fleet',
-    description: 'An interactive, futuristic web application featuring a stunning sci-fi inspired interface. It leverages modern web technologies to deliver an immersive user experience.',
-    tags: ['React', 'Tailwind CSS', 'Vite'],
-    demo: 'https://star-fleet-silk.vercel.app',
-    source: 'https://github.com/Dashersd/Star-Fleet'
-  },
-  {
-    id: '02',
-    category: 'frontend',
-    categoryLabel: 'Front-End',
-    image: '/projects/fleuria.png',
-    title: 'Fleuria',
-    description: 'A modern floral boutique website offering handcrafted floral arrangements designed to celebrate life\'s most meaningful occasions.',
-    tags: ['React', 'Vite', 'Tailwind CSS'],
-    demo: 'https://fleuria-ddgv.vercel.app',
-    source: 'https://github.com/Dashersd/Fleuria'
-  },
-  {
-    id: '03',
-    category: 'frontend',
-    categoryLabel: 'Front-End',
-    image: '/projects/Polaris.png',
-    title: 'Polaris',
-    description: 'Much like the North Star, Polaris is your ultimate style compass. Discover curated, avant-garde fashion designed to help you stand out and find your own direction.',
-    tags: ['React', 'Tailwind CSS', 'Framer Motion', 'Vite'],
-    demo: 'https://polaris-chi-olive.vercel.app/',
-    source: 'https://github.com/Dashersd/Polaris'
-  },
-  {
-    id: '04',
-    category: 'frontend',
-    categoryLabel: 'Front-End',
-    image: '/projects/Eutopia.png',
-    title: 'Eutopia',
-    description: 'A creative workspace where imagination sparks. Eutopia shapes avant-garde ideas that don\'t exist yet and brings them to life through the power of AI.',
-    tags: ['React', 'Tailwind CSS', 'Framer Motion', 'Vite'],
-    demo: 'https://eutopia-indol.vercel.app/',
-    source: 'https://github.com/Dashersd/eutopia'
-  },
-  {
-    id: '05',
-    category: 'frontend',
-    categoryLabel: 'Front-End',
-    image: '/projects/Aurelia.png',
-    title: 'Aurelia',
-    description: 'A modern, elegant luxury jewelry e-commerce website designed for premium collections. Features high-performance interactive showcases and sophisticated animations.',
-    tags: ['React', 'Tailwind CSS', 'Framer Motion', 'TypeScript'],
-    demo: 'https://aurelia-sigma.vercel.app/',
-    source: 'https://github.com/Dashersd/Aurelia'
-  },
-  {
-    id: '06',
-    category: 'frontend',
-    categoryLabel: 'Front-End',
-    image: '/projects/timeshift.png',
-    title: 'Time Shift',
-    description: 'A premium e-commerce platform for luxury timepieces. Implements an intricate 3D animated analog clock, dynamic scroll-driven visual transitions, a sleek collection catalog, and a fully functional shopping cart.',
-    tags: ['HTML5', 'CSS3', 'JavaScript', '3D Animations'],
-    demo: 'https://time-shift-ivory.vercel.app/watch.html',
-    source: 'https://github.com/Dashersd/TimeShift'
-  },
-  {
-    id: '08',
-    category: 'fullstack',
-    categoryLabel: 'Full-Stack',
-    image: '/projects/Resume Builder.png',
-    title: 'Resume Builder',
-    description: 'A full-stack resume builder that lets users craft, customize, and export professional resumes in real time. Features live template previews, section editing, and one-click PDF export powered by a modern web stack.',
-    tags: ['Next.js', 'Prisma', 'React', 'MariaDB', 'Tailwind CSS'],
-    demo: 'https://resume-builder-five-rosy.vercel.app',
-    source: null
-  }
-];
+import SpotlightCard from './ui/SpotlightCard';
+import { projectsData } from '../data/projects';
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
   const [visibleProjects, setVisibleProjects] = useState(projectsData);
 
+  // Derive unique categories from data
+  const categories = useMemo(() => {
+    const uniqueCats = new Map();
+    projectsData.forEach(p => {
+      if (!uniqueCats.has(p.category)) {
+        uniqueCats.set(p.category, p.categoryLabel);
+      }
+    });
+    return Array.from(uniqueCats.entries()).map(([value, label]) => ({ value, label }));
+  }, []);
+
+  // Compute live project counts per category
+  const categoryCounts = useMemo(() => {
+    const counts = { all: projectsData.length };
+    projectsData.forEach(p => {
+      counts[p.category] = (counts[p.category] || 0) + 1;
+    });
+    return counts;
+  }, []);
+
+  // Filter projects dynamically by category
   useEffect(() => {
     if (filter === 'all') {
       setVisibleProjects(projectsData);
@@ -102,67 +46,100 @@ const Projects = () => {
         <div className="section-line"></div>
       </Reveal>
 
+      {/* Filter Tabs with Live Count Badges */}
       <Reveal delay={0.2} className="project-filters">
         <button 
           className={`filter-btn ripple ${filter === 'all' ? 'active' : ''}`} 
           onClick={() => setFilter('all')}
-        >All Projects</button>
-        <button 
-          className={`filter-btn ripple ${filter === 'frontend' ? 'active' : ''}`} 
-          onClick={() => setFilter('frontend')}
-        >Front-End & UI</button>
-        <button 
-          className={`filter-btn ripple ${filter === 'fullstack' ? 'active' : ''}`} 
-          onClick={() => setFilter('fullstack')}
-        >Full-Stack & Systems</button>
+          aria-label="Show all projects"
+        >
+          All Projects <span className="filter-count">{categoryCounts.all}</span>
+        </button>
+        {categories.map((cat) => (
+          <button 
+            key={cat.value}
+            className={`filter-btn ripple ${filter === cat.value ? 'active' : ''}`} 
+            onClick={() => setFilter(cat.value)}
+            aria-label={`Show ${cat.label} projects`}
+          >
+            {cat.label} <span className="filter-count">{categoryCounts[cat.value] || 0}</span>
+          </button>
+        ))}
       </Reveal>
 
-      <div className="projects-grid">
-        {visibleProjects.map((project, index) => (
-          <Reveal key={project.id} delay={0.1 * (index % 4)}>
-            <Tilt 
-              className="project-card" 
-              glareEnable={true} 
-              glareMaxOpacity={0.15} 
-              glareColor="#ffffff"
-              glarePosition="all"
-              tiltMaxAngleX={5}
-              tiltMaxAngleY={5}
-              scale={1.02}
-              transitionSpeed={2000}
-            >
-              <div className="project-img-wrap">
-                <span className={`card-category-badge ${project.category === 'fullstack' ? 'badge-fullstack' : ''}`}>
-                  {project.categoryLabel}
-                </span>
-                <span className="card-number">{project.id}</span>
-                <img src={project.image} alt={project.title} />
-                <video src="/projects/placeholder.mp4" className="project-video" muted loop playsInline></video>
-                <div className="project-overlay"></div>
-              </div>
-              <div className="project-info">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <div className="project-tags">
-                  {project.tags.map(tag => <span key={tag}>{tag}</span>)}
-                </div>
-                <div className="project-btns">
-                  <a href={project.demo} target="_blank" rel="noreferrer" className="btn btn-sm btn-primary ripple">
-                    <i className="fas fa-external-link-alt"></i> Live Demo
-                  </a>
-                  {project.source && (
-                    <a href={project.source} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline ripple">
-                      <i className="fab fa-github"></i> Source
-                    </a>
-                  )}
-                </div>
-              </div>
-            </Tilt>
-          </Reveal>
-        ))}
-      </div>
+      {visibleProjects.length === 0 ? (
+        <Reveal className="text-center" delay={0.3}>
+          <p style={{ color: 'var(--gray)', fontSize: '1.1rem', marginTop: '2rem' }}>
+            No projects found matching your search.
+          </p>
+        </Reveal>
+      ) : (
+        <motion.div className="projects-grid" layout>
+          <AnimatePresence>
+            {visibleProjects.map((project, index) => (
+              <motion.div 
+                key={project.id} 
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.35 }}
+              >
+                <SpotlightCard>
+                  <Tilt 
+                    className="project-card" 
+                    glareEnable={true} 
+                    glareMaxOpacity={0.15} 
+                    glareColor="#ffffff"
+                    glarePosition="all"
+                    tiltMaxAngleX={5}
+                    tiltMaxAngleY={5}
+                    scale={1.02}
+                    transitionSpeed={2000}
+                  >
+                    <div className="project-img-wrap">
+                      {project.featured && (
+                        <span className="featured-badge">⭐ Featured</span>
+                      )}
+                      <span className={`card-category-badge ${project.category === 'fullstack' ? 'badge-fullstack' : ''}`}>
+                        &lt;{project.categoryLabel} /&gt;
+                      </span>
+                      <span className="card-number">{project.id}</span>
+                      <img src={project.image} alt={`Screenshot of ${project.title}`} loading="lazy" />
+                      {project.video && (
+                        <video src={project.video} className="project-video" muted loop playsInline></video>
+                      )}
+                      <div className="project-overlay"></div>
+                    </div>
+                    <div className="project-info">
+                      <h3>{project.title}</h3>
+                      <p>{project.description}</p>
+                      <div className="project-tags">
+                        {project.tags.map(tag => <span key={tag}>{tag}</span>)}
+                      </div>
+                      <div className="project-btns">
+                        <a href={project.demo} target="_blank" rel="noreferrer" className="btn btn-sm btn-primary ripple" aria-label={`View live demo for ${project.title}`}>
+                          <i className="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                        {project.source && (
+                          <a href={project.source} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline ripple" aria-label={`View source code for ${project.title}`}>
+                            <i className="fab fa-github"></i> Source
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </Tilt>
+                </SpotlightCard>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      )}
     </section>
   );
 };
 
 export default Projects;
+
+
+
