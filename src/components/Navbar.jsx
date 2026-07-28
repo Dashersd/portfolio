@@ -32,7 +32,7 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} id="navbar">
       <a href="#home" className="nav-brand">HD<span className="brand-bracket">.</span></a>
       
-      <ul className={`nav-links ${menuOpen ? 'active' : ''}`} id="navLinks">
+      <ul className={`nav-links ${menuOpen ? 'open active' : ''}`} id="navLinks">
         <li>
           <a 
             href="#home" 
@@ -71,7 +71,7 @@ const Navbar = () => {
       </ul>
 
       <button 
-        className={`hamburger ${menuOpen ? 'active' : ''}`} 
+        className={`hamburger ${menuOpen ? 'open active' : ''}`} 
         onClick={toggleMenu}
         aria-label="Toggle navigation"
       >

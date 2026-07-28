@@ -58,7 +58,7 @@ const Contact = () => {
                 <label htmlFor="message">Message</label>
                 <textarea id="message" rows="4" placeholder="Tell me about your project goals..." className="neon-input" required></textarea>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+              <div className="form-submit-wrap" style={{ display: 'flex', justifyContent: 'flex-start' }}>
                 <button 
                   type="submit" 
                   className={`btn btn-primary ripple ${success ? 'success' : ''}`} 
@@ -87,10 +87,10 @@ const Contact = () => {
             <div className="contact-info-cards">
               <div className="contact-info-card">
                 <div className="contact-info-icon"><i className="fas fa-envelope"></i></div>
-                <div className="contact-info-text" style={{ flexGrow: 1 }}>
+                <div className="contact-info-text" style={{ flexGrow: 1, minWidth: 0 }}>
                   <h4>Direct Email</h4>
-                  <p style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <span>helmandacuma5@gmail.com</span>
+                  <p className="email-copy-row">
+                    <span className="email-text">helmandacuma5@gmail.com</span>
                     <button onClick={handleCopyEmail} className="copy-email-btn" type="button" aria-label="Copy email address">
                       {copied ? 'Copied! ✓' : 'Copy'}
                     </button>

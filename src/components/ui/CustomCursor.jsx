@@ -5,6 +5,11 @@ const CustomCursor = () => {
   const dotRef = useRef(null);
 
   useEffect(() => {
+    // Check if touch device or mobile screen size
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth <= 900) {
+      return;
+    }
+
     let mx = -100, my = -100;
     let gx = -100, gy = -100;
     let animationFrameId;

@@ -76,7 +76,7 @@ const Projects = () => {
       ) : (
         <motion.div className="projects-grid" layout>
           <AnimatePresence>
-            {visibleProjects.map((project, index) => (
+            {visibleProjects.map((project) => (
               <motion.div 
                 key={project.id} 
                 layout
